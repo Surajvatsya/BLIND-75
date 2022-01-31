@@ -1,0 +1,5 @@
+//concept :-
+stand at any particular i , and see if the elements>elements @ i.. from i+1 to n-1 
+store that value in mx, and update mx @ every i
+
+
