@@ -2,4 +2,20 @@
 stand at any particular i , and see if the elements>elements @ i.. from i+1 to n-1 
 store that value in mx, and update mx @ every i
 
+int maxProfit(vector<int>& prices) {
+       
+        int n = prices.size();
+        for(int i=0; i<n; i++){
+            int ele = search(prices,prices[i],i+1,n-1);
+            int temp;
+            
+          temp = ele-prices[i];
+          mx = max(mx, temp)  ;
+        }
+        return mx;
+    }
+    
+    TLE
+    T= O(N2)
+
 
