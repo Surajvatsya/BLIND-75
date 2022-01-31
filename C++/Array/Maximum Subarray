@@ -1,0 +1,40 @@
+TLE 
+
+int maxSubArray(vector<int>& nums) {
+        int n=nums.size();
+        int mx=INT_MIN;
+        for(int i=0; i<n; i++){
+            int s=0;
+            for(int j=i;j<n;j++){
+               s+=nums[j];
+                mx=max(mx,s);
+            }
+        }
+        return mx;
+    }
+    
+    T = O(N2)
+    
+    
+    ---------------------------OPTIMAL-------------------------
+    
+    
+    int maxSubArray(vector<int>& nums) {
+        int n=nums.size();
+        int mx=INT_MIN;
+        int cs=0;
+        for(int i=0; i<n; i++){
+            cs+=nums[i];
+            mx= max(mx,cs);
+            
+            //if loop must be lower than mx=max(mx,cs) for this type of case  -1 -2 -3 ;
+            if(cs<0)
+                cs=0;
+        }
+        return mx;
+    }
+    
+    T= O(N)
+    
+    -1 -2 -3
+    this case also be takecared.
