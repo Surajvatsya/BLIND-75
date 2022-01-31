@@ -1,0 +1,103 @@
+ # Naive soln
+    
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+       int i,j;
+        int flag = 0;
+        for( i=0; i<n; i++){
+            for( j=i+1; j<n; j++){
+                if(nums[i]+nums[j]==target)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag)
+                break;
+        }
+        return {i,j};
+    }
+    
+     T = O(n2);
+    
+-----------Optimize--------------
+
+# wrong approach
+vector<int> twoSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        int i=0;
+        int j=nums.size()-1;
+        
+        while(i<j){
+            if(nums[i]+nums[j]==target)
+            break;
+            else if(nums[i]+nums[j]<target)
+                i++;
+            else
+                j--;
+        }
+        
+        return{i,j};
+    }
+    
+    why wrong?
+    b/c here we have to return index so we cant manipulate indexes with sorting.
+    
+    
+    # use space (map)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int>mp;
+        int n = nums.size();
+        int i;
+        for(i=0; i<n; i++){
+            if(mp.find(target - nums[i])!=mp.end()){
+                break;
+            }
+        else
+                mp[nums[i]] = i;
+        }
+        return {mp[target - nums[i]], i};
+    }
+    
+    T = O(n);
+    S = O(1); //avg case
+    
+    # one more soln 
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans,nums2;
+         nums2 = nums;
+        int l = nums.size()-1;
+        int n = l;
+       
+        sort(nums2.begin(),nums2.end());
+        int s = 0;
+        int n1,n2;
+        while(s<l){
+            if(nums2[s]+nums2[l]==target)
+            {
+                 n1 = nums2[s];
+                 n2 = nums2[l];
+                break;
+            }
+            else if(nums2[s]+nums2[l] < target){
+                s++;
+            }
+            else
+                l--;
+        }
+        
+        for(int i = 0; i<=n; i++ ){
+            
+            if(nums[i]==n1){
+                ans.push_back(i);
+            }
+            else if(nums[i]==n2){
+                ans.push_back(i);
+            }
+        }
+        
+        return ans;
+    }
+    
+    T = nlogn
+    S = n;
