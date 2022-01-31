@@ -1,0 +1,101 @@
+EXPLANATION IN COPY
+----------------------NAIVE APPROACH-------------------------
+vector<int> productExceptSelf(vector<int>& nums) {
+        int n= nums.size();
+        vector<int>ans(n);
+        for(int i=0; i<n; i++){
+            int p=1;
+            for(int j=0; j<n; j++){
+                if(j==i)
+                    continue;
+                else{
+                    p*=nums[j];
+                }
+                ans[i]=p;
+            }
+        }
+     return ans;   
+    }
+    
+    
+    TLE
+    T= O(N2)
+   ------------------------------------------------------------------
+   
+   ------one more soln but wrong----------------------------------------
+   concept :- multiply all ele , store it in p. run a for loop and divide p by elements of nums
+   vector<int> productExceptSelf(vector<int>& nums) {
+        
+        
+        int n= nums.size();
+         int p=1;
+        
+        for(int i=0; i<n; i++){
+           
+            p*=nums[i];
+        }
+        for(int i=0; i<n; i++){
+            nums[i] = p/nums[i];
+        }
+        
+        
+     return nums;   
+    }
+    
+    wrong why?
+    b/c what if nums[i]==0 
+    You must write an algorithm that runs in O(n) time and without using the division operation.
+    
+    
+    ---------------- WITH SPACE -------------
+     vector<int> productExceptSelf(vector<int>& nums) {
+        int n= nums.size();
+         
+        vector<int>l(n);
+         vector<int>r(n);
+         vector<int>ans(n);
+        l[0]=nums[0];
+        
+      for(int i=1; i<n;i++){
+          l[i]=l[i-1]*nums[i];
+      }
+        r[n-1]=nums[n-1];
+        for(int i=n-2; i>=0;i--){
+          r[i] = r[i+1]*nums[i];
+      }
+        ans[0]=r[1];
+        ans[n-1]=l[n-2];
+        for(int i=1; i<n-1; i++){
+            ans[i]=l[i-1]*r[i+1];
+        }
+        return ans;
+        }
+        
+        T=O(N)
+        S=O(N)
+        
+        
+        
+        -------------------------OPTIMAL------------------------------
+        
+        REDUCE SPACE TO ZERO
+         vector<int> productExceptSelf(vector<int>& nums) {
+        
+        
+         int n= nums.size();
+        vector<int>l(n);
+        l[0]=nums[0];
+        
+      for(int i=1; i<n;i++){
+          l[i]=l[i-1]*nums[i];
+      }
+        int p=1;
+        
+        for(int i=n-1;i>=1;i--){
+            l[i]=l[i-1]*p;
+            p*=nums[i];
+        }
+        l[0]=p;
+        return l;
+    }
+        
