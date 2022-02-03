@@ -1,0 +1,61 @@
+--------------------------------------------------------------------BRUTE FORCE-----------------------------------------------------------------------
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+       
+        int n= height.size();
+       int mx = INT_MIN;
+        
+        for(int i=0; i<n-1; i++){
+            for(int j=i+1; j<n; j++){
+                int mn = min(height[i],height[j]);
+                int ans = mn * (j-i);
+                mx = max(mx, ans );
+                
+            }
+        }
+        return mx;
+    }
+};
+
+T = O(N2)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------OPTIMIZE-------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+       
+        int n= height.size();
+       int mx = INT_MIN;
+        
+        int i=0; int j= n-1;
+        
+        while(i<j){
+            
+            int width = j-i;
+            int h = min(height[i],height[j]);
+            mx = max(mx, width* h);
+            
+            if(h==height[i]){
+               
+                
+                 i++;
+            }
+            else{
+                
+                j--;
+            }
+            
+           
+            
+        }
+        return mx;
+        
+    }
+};
+
