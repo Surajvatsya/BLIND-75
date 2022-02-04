@@ -1,0 +1,84 @@
+-------------------------------------------------------BRUTE FORCE -------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<0)
+            return 0;
+        if(n==0)
+            return 1;
+        return climbStairs(n-1) + climbStairs(n-2);
+    }
+};
+
+T = 2^n
+S = O(N)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+recursive dp -> memoization --> Top to bottom 
+-----------------
+
+class Solution {
+public:
+   
+    int solve( vector<int>&v, int n){
+         if(n<0)
+            return 0;
+        if(n==0)
+            return 1;
+        if(v[n]!=-1)
+            return v[n];
+        
+        return v[n] = solve(v,n-1) + solve(v,n-2);
+        
+    }
+    
+    int climbStairs(int n) {
+         vector<int>v(n+1,-1);
+       return  solve(v,n);
+       
+        
+    }
+};
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+tabulation 
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int>v(n+1);
+        if(n==1)
+            return 1;
+        if (n==2)
+            return 2;
+        
+        v[1]=1;
+        v[2]=2;
+        
+        for(int i=3; i<n+1; i++){
+            v[i] = v[i-1] + v[i-2];
+        }
+        return v[n];
+    }
+};
+
+
+
+
+
+
+T = O(N)
+S = O(N)
