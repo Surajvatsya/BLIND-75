@@ -1,0 +1,49 @@
+Approach :- Sliding window
+
+
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        
+        int n= s.length();
+        
+        unordered_map<int,int>mp;
+        
+        int i=0, j=0, count=0,ans =0;
+        
+        while(j<n){
+        
+           //covert char to ASCII value 
+            int m = (int)s[j];
+            
+            //store ASCII value
+            mp[m]++;
+            
+            if(mp[m]<=1)
+            {
+                 j++;
+                count++;
+            }
+            else if(mp[m]>1){
+                ans = max(ans, count);
+                count =0;
+                
+                //vavd
+                i++;
+                j=i;
+                
+                //reinitialise map
+                mp.clear();
+            }
+            
+        }
+        
+        //e.g abcd -> here mp[m] never greater than 1 thats why at the ned store ans as 
+        ans = max(ans, count);
+        return ans;
+        
+    }
+};
