@@ -33,8 +33,28 @@ public:
 
 Complexity Analysis
 
-Time Complexity: O(NK)O(NK), where NN is the length of strs, and KK is the maximum length of a string in strs. Counting each string is linear in the size of the string, and we count every string.
-
-Space Complexity: O(NK)O(NK), the total information content stored in ans.
+Time Complexity: O(NKlogK),
+S= Space Complexity: O(NK)
 
 -----------------------------------------------------------------------------------------
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+     
+        map< vector<int>,vector<string> >mp;
+        for(auto &x : strs){
+            vector<int>v(26,0);
+            for(auto &y : x){
+                v[y-'a']++;
+            }
+            mp[v].push_back(x);
+        }
+            vector<vector<string>>s;
+        for(auto &p : mp)
+            s.push_back(p.second);
+        return s;
+    }
+};
+
+T = O(NK)
