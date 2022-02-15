@@ -1,0 +1,40 @@
+# BRUTE FORCE
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        for(int i=0; i<n; i++){
+            sort(strs[i].begin(),strs[i].end());
+        }
+        
+         
+        sort(strs.begin(),strs.end());
+        
+        //push same string into vector by n2
+        
+    }
+};
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+     unordered_map<string,vector<string>>mp;
+        for(auto s : strs){
+            string t = s;
+            sort(t.begin(),t.end());
+            mp[t].push_back(s);
+        }
+        vector<vector<string>> Anagrams;
+        for(auto p : mp){
+            Anagrams.push_back(p.second);
+        }
+        return Anagrams;
+    }
+};
+
+Complexity Analysis
+
+Time Complexity: O(NK)O(NK), where NN is the length of strs, and KK is the maximum length of a string in strs. Counting each string is linear in the size of the string, and we count every string.
+
+Space Complexity: O(NK)O(NK), the total information content stored in ans.
+
+-----------------------------------------------------------------------------------------
